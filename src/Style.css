@@ -4,20 +4,96 @@
 
 body {
   background-color: #89a6be;
+  overflow-x: hidden;
+  font-family: "Roboto", serif;
+  font-size: 21px !important;
+  font-weight: normal !important;
+}
+.title {
+  font-size: 35px !important;
+  color: #263d58;
+  font-weight: bold;
 }
 .card {
   background-color: #608bc1;
   border-radius: 15px;
+  width: 320px;
+  height: 640px;
   border: none;
   box-shadow: 0 0px 18px #f7f7df;
   color: white !important;
 }
 .card .image {
   border-radius: 15px;
+  width: 100% !important;
+  height: 60% !important;
 }
+.input {
+  background-color: #89a6be;
+  box-shadow: 0 2px 16px rgb(125, 117, 238);
+  border-radius: 15px;
+  color: aliceblue !important;
+  font-size: 20px;
+}
+.input:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 4px 20px rgb(81, 98, 255);
+}
+
+.icon {
+  font-size: 30px !important;
+  margin: 0px 10px;
+}
+.icon-unknown {
+  color: rgb(255, 255, 176);
+  font-size: 30px !important;
+}
+
+.alert-container {
+  position: relative;
+  background-color: #478dad;
+  left: 41%;
+  width: 400px;
+  animation: 2s alertAnimation infinite alternate;
+  box-shadow: 0 5px 12px #003161;
+  padding: 20px;
+  text-align: center;
+  color: white !important;
+  font-size: 20px;
+  transition: 0.3s ease-in-out;
+  border-radius: 25px;
+  top: 150px !important;
+}
+
 @media (max-width: 576px) {
   .col {
     width: 49%;
     flex: 49.9%;
+  }
+  .card {
+    height: 520px;
+    box-shadow: 0 5px 10px rgb(47, 84, 99);
+  }
+  .card .body {
+    padding: 20px 3px;
+  }
+  .card .image {
+    height: 48% !important;
+  }
+}
+
+@keyframes alertAnimation {
+  0% {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px #003161;
+  }
+  50% {
+    transform: translateY(14px);
+    box-shadow: 0 0 15px #003161;
+  }
+  100% {
+    transform: translateY(0px);
+    box-shadow: 0 0 15px #003161;
   }
 }
