@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { FormControl, Form } from "react-bootstrap";
+import { FormControl, Form, FormSelect } from "react-bootstrap";
 import { FaSkullCrossbones } from "react-icons/fa6";
 import { LuHeartPulse } from "react-icons/lu";
 import { GrStatusUnknown } from "react-icons/gr";
@@ -8,12 +8,24 @@ import { Character } from "./interfaces/Character";
 import { FaHeartCirclePlus } from "react-icons/fa6";
 import { FaHeartCircleMinus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const StyledFilterSelect = styled.select`
+  background-color: #f0f0f0; /* Arka plan rengi */
+  color: #333; /* Yazı rengi */
+  padding: 10px; /* İç boşluk */
+  border-radius: 5px; /* Kenar yuvarlama */
+  &:hover {
+    background-color: #e0e0e0; /* Üzerine gelindiğinde arka plan rengi */
+  }
+`;
 
 function App() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchCharacter, setSearchCharacter] = useState<string>("");
   const [favori, setFavori] = useState<number>(0);
+  const [filterMale, setFilterMale] = useState<string>("");
 
   useEffect(() => {
     const favorites: Character[] = JSON.parse(
@@ -93,6 +105,12 @@ function App() {
       .toLowerCase()
       .includes(searchCharacter.toLowerCase());
 
+    if (filterMale === "male") {
+      return nameMatch && character.gender === "Male";
+    } else if (filterMale === "female") {
+      return nameMatch && character.gender === "Female";
+    }
+
     return nameMatch;
   });
 
@@ -116,6 +134,16 @@ function App() {
             className="input my-5"
             onChange={(e) => setSearchCharacter(e.target.value)}
           />
+        </Form>
+        <Form>
+          <StyledFilterSelect
+            value={filterMale}
+            onChange={(e) => setFilterMale(e.target.value)}
+          >
+            <option defaultChecked>Cinsiyet</option>
+            <option value="female">Kadın</option>
+            <option value="male">Erkek</option>
+          </StyledFilterSelect>
         </Form>
       </div>
       <div className="container mx-auto p-4">
