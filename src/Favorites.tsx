@@ -4,6 +4,8 @@ import { FaSkullCrossbones } from "react-icons/fa6";
 import { LuHeartPulse } from "react-icons/lu";
 import { GrStatusUnknown } from "react-icons/gr";
 import { Character } from "./components/interfaces/Character";
+import { IoArrowBack } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 function Favorites() {
   const [favorites, setFavorites] = useState<Character[]>([]);
@@ -17,6 +19,11 @@ function Favorites() {
 
   return (
     <div>
+      <div className="back-btn">
+        <Link to="/">
+          <IoArrowBack />{" "}
+        </Link>
+      </div>
       <h1 className="text-center my-3 text-3xl text-white">
         Favori Karakterler
       </h1>

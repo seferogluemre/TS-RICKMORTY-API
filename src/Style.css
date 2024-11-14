@@ -90,15 +90,23 @@ body {
 }
 
 .favorited-length {
-  background-color: rgba(108, 141, 108, 0.8);
+  background-color: rgba(108, 141, 108);
   position: fixed !important;
   right: 3%;
   border-radius: 15px;
   font-size: 30px;
+  box-shadow: 0 0px 10px rgb(59, 121, 59);
   color: white;
   text-align: center;
   bottom: 3%;
   width: 320px;
+}
+.back-btn {
+  position: relative;
+  top: 20px;
+  left: 20px;
+  font-size: 35px;
+  cursor: pointer;
 }
 
 @media (max-width: 576px) {
