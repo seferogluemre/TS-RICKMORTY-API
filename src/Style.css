@@ -74,11 +74,31 @@ body {
 
 .favorite-icon {
   font-size: 26px;
+  color: rgb(87, 94, 107);
+  position: absolute;
+  right: 3%;
+  top: 95%;
+  cursor: pointer !important;
+}
+.favorite-icon-two {
+  font-size: 26px;
   color: rgb(255, 119, 119);
   position: absolute;
   right: 3%;
   top: 95%;
   cursor: pointer !important;
+}
+
+.favorited-length {
+  background-color: rgba(108, 141, 108, 0.8);
+  position: fixed !important;
+  right: 3%;
+  border-radius: 15px;
+  font-size: 30px;
+  color: white;
+  text-align: center;
+  bottom: 3%;
+  width: 320px;
 }
 
 @media (max-width: 576px) {
