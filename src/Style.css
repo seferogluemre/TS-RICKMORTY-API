@@ -20,8 +20,13 @@ body {
   width: 320px;
   height: 640px;
   border: none;
-  box-shadow: 0 0px 18px #f7f7df;
+  box-shadow: 0 0px 15px #01473e;
   color: white !important;
+  transition: 0.2s ease-in-out;
+}
+.card:hover {
+  transform: scale(1.02) translateY(-5px);
+  box-shadow: 0 0 18px #04685b;
 }
 .card .image {
   border-radius: 15px;
@@ -95,5 +100,23 @@ body {
   100% {
     transform: translateY(0px);
     box-shadow: 0 0 15px #003161;
+  }
+}
+
+.loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 50px; /* Loader size */
+  height: 50px; /* Loader size */
+  animation: spin 1s linear infinite; /* Animation */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

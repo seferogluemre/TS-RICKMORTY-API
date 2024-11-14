@@ -48,8 +48,8 @@ function App() {
 
   if (loading) {
     return (
-      <div className={`${loading ? "alert-container" : "none"}`}>
-        <Alert className="">Karakterler Yüklenirken Hata Oluştu</Alert>
+      <div className="flex justify-center items-center h-screen">
+        <div className="loader"></div>
       </div>
     );
   }
@@ -93,7 +93,7 @@ function App() {
                       </span>
                     </p>
                     <p className="mb-3 font-bold text-lg flex justify-center">
-                      <span>Yaşıyormu? </span>
+                      <span>Yaşıyormu : </span>
                       {(() => {
                         // Status Kontrolüne göre deger döndürme
                         switch (status) {
