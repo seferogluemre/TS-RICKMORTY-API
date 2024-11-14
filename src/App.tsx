@@ -4,14 +4,9 @@ import { Alert, FormControl, Form } from "react-bootstrap";
 import { FaSkullCrossbones } from "react-icons/fa6";
 import { LuHeartPulse } from "react-icons/lu";
 import { GrStatusUnknown } from "react-icons/gr";
-interface Character {
-  id: number;
-  name: string;
-  status: string;
-  gender: string;
-  location: { name: string };
-  image: string;
-}
+import { Character } from "./components/interfaces/Character";
+import { FaHeartCirclePlus } from "react-icons/fa6";
+import { FaHeartCircleMinus } from "react-icons/fa6";
 
 function App() {
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -28,7 +23,6 @@ function App() {
         const data = await response.data.results;
         setCharacters(data);
         setLoading(false);
-        console.log(data);
       } catch (error) {
         console.error("API Hatası var kardeşim " + error);
         setLoading(false);
@@ -37,6 +31,51 @@ function App() {
 
     getAllCharacters();
   }, []);
+
+  const addToFavorites = (character: Character): void => {
+    const favorites: Character[] = JSON.parse(
+      sessionStorage.getItem("favorites") || "[]"
+    );
+
+    if (!favorites.some((fav) => fav.id === character.id)) {
+      favorites.push(character); // Eğer karakter favorilerde yoksa ekle
+      sessionStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+  };
+
+  const removeFromFavorites = (id: number): void => {
+    const favorites: Character[] = JSON.parse(
+      sessionStorage.getItem("favorites") || "[]"
+    );
+    // Silmek istedigimiz ürün filtrelemeye girer eşit olmayan ürünler dizide kalır ve eşit olanı diziden çıkartarak silmiş olur
+    const updatedFavorites: Character[] = favorites.filter(
+      (fav) => fav.id !== id
+    );
+    // Yeni Haliyle Güncelliyoruz
+    sessionStorage.setItem("favorites", JSON.stringify(updatedFavorites)); // Favorilerden çıkar
+  };
+
+  // Dışarıdan gelen id eger bizim storagedeki ürünlerin içlerinde varsa true yoksa false döner
+  const characterIsFavorite = (id: number): boolean => {
+    const favorites: Character[] = JSON.parse(
+      sessionStorage.getItem("favorites") || "[]"
+    );
+    return favorites.some((fav) => fav.id === id);
+  };
+
+  // Favoriye ekleme ve çıkarma
+  const handleFavoriteClick = (character: Character) => {
+    // Dışaradn gelen karakter kontrole girer ve eger var ise characterIsfavorite'den true döner ve ürün oldugu için çıkarma işlemini yapar
+    if (characterIsFavorite(character.id)) {
+      removeFromFavorites(character.id); // Favoriden çıkar
+    }
+    // Eger False dönerse yani ürün yok ise ürünü yeni eklemiş oluyor
+    else {
+      addToFavorites(character); // Favoriye ekle
+    }
+    // Tekrardan güncelliyoruz
+    setCharacters([...characters]); //Stati setliyoruz
+  };
 
   const searchCharacters = characters.filter((character) => {
     const nameMatch = character.name
@@ -78,7 +117,8 @@ function App() {
               >
                 <div className="max-w-sm card shadow-2xl border  rounded-xl dark:bg-gray-800 dark:border-gray-700">
                   <img className="image" src={image} alt="Karakter fotografı" />
-                  <div className="p-5 body">
+                  <div className="p-5 body my-1">
+                    ""
                     <p className="mb-4 font-bold text-lg ">{name}</p>
                     <p className="mb-4 font-bold text-lg ">
                       Adres:{" "}
@@ -110,6 +150,24 @@ function App() {
                         }
                       })()}
                     </p>
+                  </div>
+                  <div
+                    onClick={() =>
+                      handleFavoriteClick({
+                        id,
+                        gender,
+                        image,
+                        name,
+                        location,
+                        status,
+                      })
+                    }
+                  >
+                    {characterIsFavorite(id) ? (
+                      <FaHeartCircleMinus className="favorite-icon" />
+                    ) : (
+                      <FaHeartCirclePlus className="favorite-icon" />
+                    )}
                   </div>
                 </div>
               </div>

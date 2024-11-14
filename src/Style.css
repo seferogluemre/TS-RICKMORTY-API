@@ -19,6 +19,7 @@ body {
   border-radius: 15px;
   width: 320px;
   height: 640px;
+  position: relative;
   border: none;
   box-shadow: 0 0px 15px #01473e;
   color: white !important;
@@ -69,6 +70,15 @@ body {
   transition: 0.3s ease-in-out;
   border-radius: 25px;
   top: 150px !important;
+}
+
+.favorite-icon {
+  font-size: 26px;
+  color: rgb(255, 119, 119);
+  position: absolute;
+  right: 3%;
+  top: 95%;
+  cursor: pointer !important;
 }
 
 @media (max-width: 576px) {
