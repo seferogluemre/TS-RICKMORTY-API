@@ -187,9 +187,11 @@ function App() {
         </div>
       </div>
 
-      <div className="favorited-length">
-        <Link to="/favorites-characters">Favori Karakterler: {favori}</Link>
-      </div>
+      {favori && (
+        <div className="favorited-length">
+          <Link to="/favorites-characters">Favori Karakterler: {favori}</Link>
+        </div>
+      )}
     </>
   );
 }
