@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #89a6be;
+}
+.card {
+  background-color: #608bc1;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 0px 18px #f7f7df;
+  color: white !important;
+}
+.card .image {
+  border-radius: 15px;
+}
+@media (max-width: 576px) {
+  .col {
+    width: 49%;
+    flex: 49.9%;
+  }
+}
